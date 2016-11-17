@@ -1,11 +1,11 @@
-<template> 
-    <div class="tab-nav">
-      
-      <div class="nav-item" v-for="(item,idx) in classItem" :class="{active: index==idx }" @click="addActive(idx)" >
-        {{ item }}
-      </div> 
-      <div class="tab-ink-bar" :class="barClass" :style="barStyle"></div>
+<template>
+  <div class="tab-nav">
+
+    <div class="nav-item" v-for="(item,idx) in classItem" :class="{active: index==idx }" @click="addActive(idx)">
+      {{ item }}
     </div>
+    <div class="tab-ink-bar" :class="barClass" :style="barStyle"></div>
+  </div>
   </div>
 </template>
 
@@ -68,7 +68,11 @@ export default {
   @prefixClass: tab;
   @easing-in-out: cubic-bezier(0.35, 0, 0.25, 1);
   @effect-duration: .3s;
-  .@{prefixClass}{
+  .@ {
+    prefixClass
+  }
+  
+  {
     &-ink-bar {
       position: absolute;
       height: 2px;
@@ -82,10 +86,12 @@ export default {
       }
     }
   }
-  .active{
+  
+  .active {
     border: none;
-    color: rgb(4, 190, 2)  !important;
+    color: rgb(4, 190, 2) !important;
   }
+  
   .tab-nav {
     display: flex;
     background-color: #fff;
@@ -115,15 +121,15 @@ export default {
   }
   
   .content {
-    position: relative; 
-    width: 100%; 
+    position: relative;
+    width: 100%;
   }
-
-  .vue-swip{
+  
+  .vue-swip {
     overflow: hidden;
     position: relative;
   }
-
+  
   .vux-swiper-item {
     position: absolute;
     top: 0;
@@ -131,12 +137,12 @@ export default {
     width: 100%;
     height: 100%;
   }
-
+  
   .tab-swiper {
     background-color: #fff;
     height: 100px;
-  
   }
+  
   .vux-center {
     justify-content: center;
   }

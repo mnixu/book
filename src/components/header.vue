@@ -22,7 +22,7 @@ export default {
 	line-height: 40px;
 	text-align: center;
 	border-bottom: 1px #4399b8 solid;
-	font-size: 14px;
+	font-size: 16px;
 	padding: 0 10px;
 	border-top: 1px #5db3d2 solid; 
 	a { 

@@ -1,18 +1,21 @@
 <template>
+  <div class="book">
+  <div v-if="thed" class="t_thed">
+    <h4>{{thed}}</h4>
+  </div>
   <div class="tab-nav">
-
     <div class="nav-item" v-for="(item,idx) in classItem" :class="{active: index==idx }" @click="addActive(idx)">
       {{ item }}
     </div>
     <div class="tab-ink-bar" :class="barClass" :style="barStyle"></div>
   </div>
-  </div>
+  </div> 
 </template>
 
 <script>
  
 export default { 
-  props: ['classItem'],
+  props: ['thed','classItem'],
   ready () {
     // stop bar anmination on first loading
     setTimeout(() => {
@@ -21,10 +24,10 @@ export default {
   },
   computed: {
     barLeft () {
-      return `${this.index * (100 / 3)}%`
+      return `${this.index * (100 / this.length )}%`
     },
     barRight () {
-      return `${(3 - this.index - 1) * (100 / 3)}%`
+      return `${(this.length - this.index - 1) * (100 / this.length)}%`
     },
     barStyle () {
       return {
@@ -47,7 +50,8 @@ export default {
       direction: 'forward',
       right: '100%',
       hasReady: false,
-      index: 0 
+      index: 0,
+      length: this.classItem.length
     }
   },  
   watch: {
@@ -57,7 +61,8 @@ export default {
   },
   methods: {
     addActive (index){
-      this.index = index;
+      this.index = index; 
+      this.$emit("clickTab",index)
     }
   }
 }
@@ -68,11 +73,7 @@ export default {
   @prefixClass: tab;
   @easing-in-out: cubic-bezier(0.35, 0, 0.25, 1);
   @effect-duration: .3s;
-  .@ {
-    prefixClass
-  }
-  
-  {
+  .@{prefixClass}{
     &-ink-bar {
       position: absolute;
       height: 2px;
@@ -85,6 +86,16 @@ export default {
         transition: right @effect-duration @easing-in-out @effect-duration * 0.3, left @effect-duration @easing-in-out;
       }
     }
+  }
+  .book {
+    width: 100%;
+    background: #fff;
+  }
+
+  .t_thed {
+    text-align: left;
+    font-size: 13px;
+    padding: 15px 10px 15px 10px;
   }
   
   .active {

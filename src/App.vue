@@ -18,9 +18,8 @@
     <tab-nav :classItem="['日榜','周榜','月榜']" @clickTab="clickTab1"></tab-nav>
     <book-top :list="list1"></book-top>
 
+    <book-image thed='猜你喜欢' :list="listImage"></book-image>
 
-
-    
     <tab-nav :classItem="['玄幻','武侠']" @clickTab="clickTab2"></tab-nav>
     <book-top :list="list2"></book-top>
 
@@ -89,25 +88,25 @@
 </script>
 
 <style scoped lang="less">
-
   #app {
     background: #f7f7f7;
-  } 
+  }
+  
   .indexNav {
-		height: 40px;
-		background: rgb(4, 190, 2);;
-		line-height: 40px;
-		text-align: center;
-		border-bottom: 1px rgb(4, 190, 2) solid;
-		font-size: 16px;
-		padding: 0 10px;
-		border-top: 1px rgb(4, 190, 2) solid;
+    height: 40px;
+    background: rgb(4, 190, 2);
+    ;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 1px rgb(4, 190, 2) solid;
+    font-size: 16px;
+    padding: 0 10px;
+    border-top: 1px rgb(4, 190, 2) solid;
     font-weight: bold;
-		a {
-			color: #fff;
-			float: left;
-			width: 25%;
-		}
-	}
-
+    a {
+      color: #fff;
+      float: left;
+      width: 25%;
+    }
+  }
 </style>

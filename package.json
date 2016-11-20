@@ -9,8 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "es6-promise": "^4.0.5",
-    "isomorphic-fetch": "^2.2.1",
+    "cheerio": "^0.22.0", 
     "vue": "^2.0.1"
   },
   "devDependencies": {

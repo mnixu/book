@@ -95,7 +95,6 @@
   .indexNav {
     height: 40px;
     background: rgb(4, 190, 2);
-    ;
     line-height: 40px;
     text-align: center;
     border-bottom: 1px rgb(4, 190, 2) solid;

@@ -78,13 +78,7 @@
           var books = response.body;  
           this.books = books;
         })
-      },
-      clickTab1(index){
-        this.list1=this.lists2[index];
-      },
-      clickTab2(index){
-        this.list2=this.lists3[index];
-      }
+      } 
     }
   }
 </script>

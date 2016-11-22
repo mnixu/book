@@ -16,13 +16,13 @@
             </div>
             <div class="aut_about">
               <ul class="aut_ul">
-                <li>作者：{{bookList.author}}</li>
+                <li>{{bookList.author}}</li>
 
-                <li>分类：玄幻/东方玄幻</li>
+                <!--<li>分类：玄幻/东方玄幻</li>-->
 
               </ul>
               <div class="about">
-                简介：蒸汽时代，逆天征程。：蒸汽时代，逆天征程。
+               {{bookList.review}}
               </div> 
             </div>
           </div>
@@ -99,9 +99,12 @@ export default {
         padding-bottom: 8px;
         color: #8c8c8c;
         font-size: 12px;  
+        
+        text-overflow: ellipsis; 
+        display: -webkit-box; 
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; 
         overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
     }
   }

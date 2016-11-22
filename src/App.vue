@@ -9,18 +9,24 @@
 
     <search></search>
 
-    <book-list thed='热门小说' :bookList='hotBook'></book-list>
+    <book-list thed='热门小说' :bookList='books.host_novels'></book-list>
 
     <book-image thed='猜你喜欢' :list="listImage"></book-image>
+  
+    <book-top thed='玄幻奇幻' :list="books.fantasy_novels"></book-top> 
 
-    <book-list thed='强推小说' :bookList='hotBook'></book-list>
+    <book-top thed='武侠仙侠' :list="books.swordsman_novels"></book-top>
+ 
+    <book-top thed='都市言情' :list="books.romantic_novels"></book-top>
+ 
+    <book-top thed='历史军事' :list="books.history_novels"></book-top>
 
-    <tab-nav :classItem="['日榜','周榜','月榜']" @clickTab="clickTab1"></tab-nav>
+    <!--<tab-nav :classItem="['日榜','周榜','月榜']" @clickTab="clickTab1"></tab-nav> 
     <book-top :list="list1"></book-top>
  
 
     <tab-nav :classItem="['玄幻','武侠']" @clickTab="clickTab2"></tab-nav>
-    <book-top :list="list2"></book-top>
+    <book-top :list="list2"></book-top>-->
 
   </div>
 
@@ -34,29 +40,24 @@
   import bookImage from './components/bookImage' 
   import search from './components/search'
    
-    var list2 =  [[{title:"我真是大明星"},{title:"我真是大明星"},{title:"我真是大明星"},{title:"我真是大明星"},{title:"我真是大明星"}],
-                          [{title:"我真是大明星1"},{title:"我真是大明星1"},{title:"我真是大明星1"},{title:"我真是大明星1"},{title:"我真是大明星1"}],
-                          [{title:"我真是大明星2"},{title:"我真是大明星2"},{title:"我真是大明星2"},{title:"我真是大明星2"},{title:"我真是大明星2"}]]
-    var list3 = [[{title:"这是月榜一"},{title:"这是月榜一"},{title:"这是月榜一"}],[{title:"这是月榜二"},{title:"这是月榜二"},{title:"这是月榜二"}]] 
+ 
     var listImage = [{image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
                       {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
                       {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
                       {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
                       {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
-                      {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
-                      {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
-                      {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},]
+                      {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"}, ]
 
   export default {
     data (){
       return { 
-        hotBook:[{image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
-                  {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},
-                  {image:"http://image.cmfu.com/Books/2673646/2673646.jpg",title:"黑铁之堡",author:"醉虎"},],
-        lists2:list2,
-        lists3:list3,
-        list1:list2[0],
-        list2:list3[0],
+        books:{ 
+          host_novels: null, 
+          fantasy_novels: null,
+          swordsman_novels:null,
+          romantic_novels:null,
+          history_novels:null
+        },
         listImage:listImage
       }
     },
@@ -72,8 +73,10 @@
     },
     methods: {
       getList(){ 
-        this.$http.get('./test').then(response =>{ 
-          console.log(response)
+        var _this = this
+        this.$http.get('./index').then(response =>{  
+          var books = response.body;  
+          this.books = books;
         })
       },
       clickTab1(index){

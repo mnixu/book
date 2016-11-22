@@ -1,9 +1,12 @@
 <template>
   <div class="content">
+    <div v-if="thed" class="t_thed">
+      <p>{{thed}}</p>
+    </div>
     <ul>
       <li onclick="location.href='/book/showbook.aspx?bookid=3347598';" v-for="(list,index) in list">
         <a href="/book/showbook.aspx?bookid=3347598">
-                  {{index}}  {{list.title}}
+                  {{list.sort?list.sort:index+1}}  {{list.title}}
         </a>
       </li>
     </ul>
@@ -12,7 +15,7 @@
 
 <script>
   export default {
-    props:["list"]
+    props:['thed',"list"]
   }
 </script>
 
@@ -20,8 +23,14 @@
   .content {
     background: #fff;
     margin-bottom: 20px;
-  }
-  
+  } 
+  .t_thed {
+    text-align: left;
+    font-size: 16px;
+    padding: 10px; 
+    border-bottom:2px solid rgb(4, 190, 2);
+    color:rgb(4, 190, 2)
+  } 
   ul {
     padding: 10px 0 10px 0;
     margin: 0px 20px 10px 20px;
@@ -34,10 +43,11 @@
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: hidden; 
   }
   
   a {
+    font-size: 14px;
     color: black;
   }
 </style>

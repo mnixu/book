@@ -6,35 +6,43 @@
     </div>
     <div class="book_list">
       <div class="book_list_detail" v-for="bookList in bookList">
-        <a href="/book/showbook.aspx?bookid=2673646" :title="bookList.title">
-          <div class="photo">
-            <img :alt="bookList.title" onerror="this.src='http://image.cmfu.com/Books/1.jpg'" :src="bookList.image" width="80" height="100">
-          </div>
-          <div class="desec">
-            <div class="bookname">
-              {{bookList.title}}
+        <router-link to='/detail'> 
+            <div class="photo">
+              <image-placeholder :src="bookList.image"
+                            placeholder="http://static.m.maizuo.com/v4/static/app/asset/3d2cdb3bd9a23609aa2d84e7c2bfd035.png"></image-placeholder>
             </div>
-            <div class="aut_about">
-              <ul class="aut_ul">
-                <li>{{bookList.author}}</li>
+            <div class="desec">
+              <div class="bookname">
+                {{bookList.title}}
+              </div>
+              <div class="aut_about">
+                <ul class="aut_ul">
+                  <li>{{bookList.author}}</li>
 
-                <!--<li>分类：玄幻/东方玄幻</li>-->
+                  <!--<li>分类：玄幻/东方玄幻</li>-->
 
-              </ul>
-              <div class="about">
-               {{bookList.review}}
-              </div> 
-            </div>
-          </div>
-        </a>
+                </ul>
+                <div class="about">
+                {{bookList.review}}
+                </div> 
+              </div>
+            </div> 
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+
+import ImagePlaceholder from './image-placeholder'
+
+export default { 
+  components: {
+    ImagePlaceholder
+  },
   props: ['thed','bookList']
+  
 }
 </script>
 

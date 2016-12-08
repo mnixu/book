@@ -2,12 +2,7 @@
   <div class="content">
     <div v-if="thed" class="t_thed">
       <p>
-      {{thed}} 
-
-      <span style="    display: block;
-    float: right;
-    width: 30%;
-    text-align: right;"><a class="huan"><em></em>换一换</a></span>
+      {{thed}}  
       </p>
     </div>
 
@@ -26,7 +21,16 @@
 
 <script>
   export default {
-    props:["thed","list"]
+    props: {
+      list: {
+        type: Array,
+        required: true
+      },
+      thed: {
+        type: String,
+        required: false
+      }
+    }
   }
 </script>
 

@@ -4,10 +4,13 @@
       <p>{{thed}}</p>
     </div>
     <ul>
-      <li onclick="location.href='/book/showbook.aspx?bookid=3347598';" v-for="(list,index) in list">
-        <a href="/book/showbook.aspx?bookid=3347598">
+      
+      <li v-for="(list,index) in list">
+        <router-link :to='"/detail/"+list.url.split("/")[3]'> 
+        <a>
                   {{list.sort?list.sort:index+1}}  {{list.title}}
         </a>
+        </router-link>
       </li>
     </ul>
   </div>

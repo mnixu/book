@@ -15,6 +15,26 @@ router.get('/index' ,function(req,res){
       if (err) return res.json();
       else return res.json(result)
     }) 
+}) 
+router.get('/book' ,function(req,res){
+    get_novels_info(req.query.id,function(err,result){
+      if (err) return res.json();
+      else return res.json(result)
+    }) 
+})
+
+router.get('/bookDetail' ,function(req,res){
+    get_catalog(req.query.id,function(err,result){
+      if (err) return res.json();
+      else return res.json(result)
+    }) 
+})
+
+router.get('/content', function(req,res){
+    get_content(req.query.id,function(err,result){
+      if (err) return res.json();
+      else return res.json(result)
+    }) 
 })
 
 //获取首页数据
@@ -163,6 +183,126 @@ function get_like_data(url,callback){
   var prefix_url = `http://www.qingdi.org/`;
   //猜你喜欢
   var like_novels = [];
+}
+
+
+function get_novels_info(id,callback){
+  var prefix_url = `http://m.qingdiba.com`;
+  var url = `${prefix_url}/${id}/`;
+  //小说详情
+  var novels_info = {};
+  var task  = [];
+  task.push(function(callback){
+
+    request(url, function(err, response, html){
+      if(err) return callback(err);
+      var $ = cheerio.load(html);
+      //console.log(html)
+      
+      var info = $(".synopsisArea_detail");
+      var title = $(".title").text();
+      novels_info.title = title;
+      //图片
+      var img = $($(info).find('img')[0]).attr('src');
+      novels_info.img = img;
+      //作者
+      var author = $($(info).find('p')[0]).text();
+      novels_info.author = author;
+      //类别
+      var sort = $($(info).find('p')[1]).text();
+      novels_info.sort = sort.replace(/\r\n/,'').trim();
+      //状态
+      var status = $($(info).find('p')[2]).text();
+      novels_info.status = status.replace(/\r\n/,'').trim();
+      //更新时间
+      var renew_time = $($(info).find('p')[3]).text();
+      novels_info.renew_time = renew_time.replace(/\r\n/,'').trim();
+      //下载地址
+      var downId = id.split("-")[1];
+      var href = `http://www.qingdi.org/modules/article/packdown.php?id=${downId}&type=txt&fname=${title}`
+      // var download_url = html.match(/document\.writeln\("<a href=\\"(http:\/\/www\.dengbi\.cc\/modules\/article\/packdown.php?.+)\\" rel=\\"nofollow\\"/);
+      novels_info.download_url = href;
+      //简介review
+      var review = $(".review").text();
+      novels_info.review = review.replace(/\r\n/,'').trim();
+      var new_lists = $(".directoryArea p").toArray();
+      //最新章节数组
+      var new_info_lists = [];
+      new_lists.forEach(function(new_list){
+        var new_obj = {};
+        new_obj.title = $($(new_list).find('a')[0]).text().replace(/\r\n/,'').trim();
+        new_obj.url = prefix_url + $($(new_list).find('a')[0]).attr('href');
+        new_info_lists.push(new_obj);
+      })
+      novels_info.new_info_lists = new_info_lists;
+      callback(null,novels_info);
+    })
+  })
+
+  async.waterfall(task, function(err, result){
+    if(err) return callback(err,null);
+    callback(null,result)
+  })  
+}
+
+
+//根据id获取目录
+function get_catalog(id,callback){
+  var prefix_url = `http://m.qingdiba.com`;
+  var url = `${prefix_url}/wapbook-${id}/`;
+  var catalogs = {books:[],title:null};
+  var task  = [];
+  task.push(function(callback){
+
+    request(url, function(err, response, html){
+      if(err) return callback(err,[]);
+      var $ = cheerio.load(html);
+      var chapterlist = $("#chapterlist p").toArray();
+      var title = $(".title").text();
+      catalogs.title = title
+      chapterlist.forEach(function(chapter,index){
+        var chapter_obj = {};
+        if(index > 0){
+          chapter_obj.url = prefix_url + $($(chapter).find('a')[0]).attr('href');
+          chapter_obj.title = $($(chapter).find('a')[0]).text().replace(/\r\n/,'').trim();
+          catalogs.books.push(chapter_obj);
+        }
+      })
+      callback(null,catalogs);
+    })
+  })
+
+  async.waterfall(task, function(err, result){
+    if(err) return callback(err,null);
+    callback(null,result)
+  })
+}
+
+function get_content(suffix_url,callback){
+  var prefix_url = `http://m.qingdiba.com`;
+  var url = `${prefix_url}/${suffix_url}/`;
+  var books = {title:null,content:null,nextBook:null,lastBook:null,allBooks:null};
+  var task  = [];
+  task.push(function(callback){
+
+    request({ encoding: "utf8", url: url}, function(err, response, html){
+      if(err) return callback(err);
+      var $ = cheerio.load(html, {decodeEntities: false});
+      if($(".title").text() && $("#pt_mulu").attr("href") && $("#pt_prev").attr("href") && $("#pt_next").attr("href")){ 
+        books.title = $(".title").text().split("&nbsp")[0];
+        books.allBooks = $("#pt_mulu").attr("href").replace(/\//g,"").split("-")[1];
+        books.lastBook = $("#pt_prev").attr("href").replace(/\//g,"");
+        books.nextBook = $("#pt_next").attr("href").replace(/\//g,"");
+        books.content = $("#chaptercontent").html();
+      }
+      callback(null,books);
+    })
+  })
+
+  async.waterfall(task, function(err, result){
+    if(err) return callback(err,null);
+    callback(null,result)
+  })
 }
 
 module.exports = router;  

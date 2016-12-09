@@ -1,7 +1,7 @@
 <template>
   <div class="App"> 
     <div class="main" v-show="!loading">
-      <keep-alive><router-view></router-view></keep-alive>
+      <router-view></router-view>
     </div>
     <div class="loading" v-if="loading">
       <div style="text-align: center; margin-top: 150px"><p style="margin: 0; padding: 0.2em 0.3em 0.2em 0">

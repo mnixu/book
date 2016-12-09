@@ -6,7 +6,7 @@
     </div>
     <div class="book_list">
       <div class="book_list_detail" v-for="bookList in bookList">
-        <router-link to='/detail'> 
+        <router-link :to='"/detail/"+bookList.url.split("/")[3]'> 
             <div class="photo">
               <image-placeholder :src="bookList.image"
                             placeholder="http://static.m.maizuo.com/v4/static/app/asset/3d2cdb3bd9a23609aa2d84e7c2bfd035.png"></image-placeholder>

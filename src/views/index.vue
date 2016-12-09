@@ -1,17 +1,17 @@
 <template>
   <div class="index" > 
     <header class="indexNav">
-      <a href="/sort.html">首页</a>
-      <a href="/sort.html">分类</a>
-      <a href="/ph/week.html">排行</a>
-      <a href="/quanben.html">全本</a>
+     <router-link :to='"/"'>首页</router-link>
+     <router-link :to='"/"'>分类</router-link>
+     <router-link :to='"/"'>排行</router-link>
+     <router-link :to='"/"'>全本</router-link>
     </header>
 
     <search></search>
 
     <book-list thed='热门小说' :bookList='books.host_novels'></book-list>
 
-    <book-image thed='猜你喜欢' :list="listImage"></book-image>
+    <!--<book-image thed='猜你喜欢' :list="listImage"></book-image>-->
 
     <book-top thed='玄幻奇幻' :list="books.fantasy_novels"></book-top>
 
@@ -80,9 +80,6 @@
           this.books = response.body; 
           this.$store.commit('FINISH_LOADING') 
         })
-      },
-      getLike () {
-        
       } 
     }
   }

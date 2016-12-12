@@ -62,18 +62,18 @@
         id: null
       }     
     },  
-    beforeRouteEnter(to, from, next){   
-      next(vm => { 
-        vm.id = vm.$route.params.id.split("-")[1];
-        vm.$store.commit('START_LOADING')
-        vm.$http.get(`/api/book?id=${vm.$route.params.id}`).then(response =>{  
-          vm.books = response.body;  
-          vm.$store.commit('FINISH_LOADING') 
-        }) 
-      })
-    },
+    // beforeRouteEnter(to, from, next){   
+    //   next(vm => { 
+    //     vm.id = vm.$route.params.id.split("-")[1];
+    //     vm.$store.commit('START_LOADING')
+    //     vm.$http.get(`/api/book?id=${vm.$route.params.id}`).then(response =>{  
+    //       vm.books = response.body;  
+    //       vm.$store.commit('FINISH_LOADING') 
+    //     }) 
+    //   })
+    // },
     created () {
-        //this.getBookDetail(this.$route.params.id)
+        this.getBookDetail(this.$route.params.id)
     },
     methods: {
       getBookDetail (id) {  
@@ -82,6 +82,15 @@
           this.books = response.body;  
           this.$store.commit('FINISH_LOADING') 
         })
+      }
+    },
+    watch: {
+      // 切换页面
+      '$route' (to, from) { 
+        if(to.params && to.params.id){
+          this.getBookDetail (to.params.id)
+        } 
+          // 如果是当前页面切换分类的情况 
       }
     },
     components: {detailHeader}

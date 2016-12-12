@@ -2,14 +2,13 @@
   <div class="content">
     <h3>{{books.title}}</h3> 
     <div v-html="books.content">
-    </div>
-
+    </div> 
     <div class="book_switch" style="">
-        <ul>
-            <li><router-link :to='"/detailMore/book/"+books.lastBook'>上一章</router-link></li> 
-            <li><router-link :to='"/detailMore/"+books.allBooks'>查看目录</router-link></li>
-            <li><router-link :to='"/detailMore/book/"+books.nextBook'>下一章</router-link></li>
-        </ul>
+      <ul>
+          <li><router-link :to='"/detailMore/book/"+books.lastBook'>上一章</router-link></li> 
+          <li><router-link :to='"/detailMore/"+books.allBooks'>查看目录</router-link></li>
+          <li><router-link :to='"/detailMore/book/"+books.nextBook'>下一章</router-link></li>
+      </ul>
     </div>
   </div>
 </template>
@@ -22,17 +21,18 @@
         books: {} 
       }     
     },  
-    beforeRouteEnter(to, from, next){   
-      next(vm => {  
-        vm.$store.commit('START_LOADING')
-        vm.$http.get(`/api/content?id=${vm.$route.params.id}`).then(response =>{  
-          vm.books = response.body;   
-          vm.$store.commit('FINISH_LOADING') 
-        }) 
-      })
-    }, 
+    // beforeRouteEnter(to, from, next){   
+    //   next(vm => {  
+    //     vm.$store.commit('START_LOADING')
+    //     vm.$http.get(`/api/content?id=${vm.$route.params.id}`).then(response =>{  
+    //       vm.books = response.body;   
+    //       vm.$store.commit('FINISH_LOADING') 
+    //     }) 
+    //   })
+    // }, 
+    
     created () {
-        //this.getBookDetail(this.$route.params.id)
+        this.getBookDetail(this.$route.params.id)
     },
     methods: {
       getBookDetail (id) {

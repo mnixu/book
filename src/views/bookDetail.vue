@@ -73,7 +73,8 @@
     //   })
     // },
     created () {
-        this.getBookDetail(this.$route.params.id)
+      this.id = this.$route.params.id.split("-")[1]
+      this.getBookDetail(this.$route.params.id)
     },
     methods: {
       getBookDetail (id) {  

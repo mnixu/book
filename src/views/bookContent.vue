@@ -4,7 +4,7 @@
     <div v-html="books.content">
     </div> 
     <div class="book_switch" style="">
-      <ul>
+      <ul class="clearfix">
           <li><router-link :to='"/detailMore/book/"+books.lastBook'>上一章</router-link></li> 
           <li><router-link :to='"/detailMore/"+books.allBooks'>查看目录</router-link></li>
           <li><router-link :to='"/detailMore/book/"+books.nextBook'>下一章</router-link></li>
@@ -66,7 +66,7 @@
 }
 .book_switch{
   
-  padding:10px 0;
+  padding:10px 0 0 0;
   ul { 
     list-style-type: none; 
   } 

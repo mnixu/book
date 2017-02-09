@@ -36,10 +36,10 @@
       <div class="boo_title_list">
           <p>《{{books.title}}》目录 </p>
           <ul>  
-            <li v-for="item in books.new_info_lists">
-              <a :href="item.url">
+            <li v-for="item in books.new_info_lists"> 
+              <router-link :to='"/detailMore/book/"+item.url.split("/")[3]'> 
                {{item.title}}
-              </a>
+              </router-link>
             </li> 
  
         </ul>
@@ -160,7 +160,8 @@
   padding: 20px 10px 10px 10px; 
   p{
     color:black;
-    font-size:18px;
+    font-size:15px;
+    margin: 0 0 0 -7px;
   }
   ul { 
     list-style-type: none;
@@ -177,7 +178,7 @@
   }
   a {
     height: 35px;
-    font-size: 15px;
+    font-size: 13px;
     color: black;
   }
   .more{

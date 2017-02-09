@@ -4,7 +4,7 @@
  
     <div class="title_more" v-if="books.title">
       <ul>
-         <li><h2>目录</h2></li>
+         <!--<li><h2>目录</h2></li>-->
          <li v-for="book in books.books"> 
           <router-link :to='"/detailMore/book/"+book.url.split("/")[3]'> 
             {{book.title}} 

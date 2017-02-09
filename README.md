@@ -1,6 +1,11 @@
-# book
+# vue-bookStore
 
-> read books project
+> A BookStore By Vue.js
+
+技术栈：
+  前端 vue2 + vue-router2 + vuex + vue-resource 
+  后端 node.js
+
 
 ## Build Setup
 

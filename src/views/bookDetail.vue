@@ -73,6 +73,7 @@
     //   })
     // },
     created () {
+      debugger
       this.id = this.$route.params.id.split("-")[1]
       this.getBookDetail(this.$route.params.id)
     },
@@ -85,15 +86,16 @@
         })
       }
     },
-    watch: {
-      // 切换页面
-      '$route' (to, from) { 
-        if(to.params && to.params.id){
-          this.getBookDetail (to.params.id)
-        } 
-          // 如果是当前页面切换分类的情况 
-      }
-    },
+    // watch: {
+    //   // 切换页面
+    //   '$route' (to, from) { 
+    //     debugger
+    //     if(to.params && to.params.id){
+    //       this.getBookDetail (to.params.id)
+    //     } 
+    //       // 如果是当前页面切换分类的情况 
+    //   }
+    // },
     components: {detailHeader}
   }
 </script>

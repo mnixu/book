@@ -5,9 +5,9 @@
     </div> 
     <div class="book_switch" style="">
       <ul class="clearfix">
-          <li><router-link :to='"/detailMore/book/"+books.lastBook'>上一章</router-link></li> 
+          <li><router-link :to='books.lastBook?"/detailMore/book/"+books.lastBook:"/detailMore/"+books.allBooks'>上一章</router-link></li> 
           <li><router-link :to='"/detailMore/"+books.allBooks'>查看目录</router-link></li>
-          <li><router-link :to='"/detailMore/book/"+books.nextBook'>下一章</router-link></li>
+          <li><router-link :to='books.nextBook?"/detailMore/book/"+books.nextBook:"/detailMore/"+books.allBooks'>下一章</router-link></li>
       </ul>
     </div>
   </div>

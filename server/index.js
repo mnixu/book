@@ -291,8 +291,16 @@ function get_content(suffix_url,callback){
       if($(".title").text() && $("#pt_mulu").attr("href") && $("#pt_prev").attr("href") && $("#pt_next").attr("href")){ 
         books.title = $(".title").text().split("&nbsp")[0];
         books.allBooks = $("#pt_mulu").attr("href").replace(/\//g,"").split("-")[1];
-        books.lastBook = $("#pt_prev").attr("href").replace(/\//g,"");
-        books.nextBook = $("#pt_next").attr("href").replace(/\//g,"");
+        if($("#pt_prev").attr("href").split("-")[2]){ 
+          books.lastBook = $("#pt_prev").attr("href").replace(/\//g,"");
+        }else{
+          books.lastBook = null;
+        }
+        if($("#pt_next").attr("href").split("-")[2]){
+          books.nextBook = $("#pt_next").attr("href").replace(/\//g,""); 
+        }else{ 
+          books.nextBook = null;
+        }
         books.content = $("#chaptercontent").html();
       }
       callback(null,books);

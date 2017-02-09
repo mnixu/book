@@ -9,7 +9,7 @@ import routers from './router'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-Vue.config.debug = process.env.NODE_ENV === 'dev'
+// Vue.config.debug = process.env.NODE_ENV === 'dev'
   
 const router = new VueRouter({
   mode: 'history',

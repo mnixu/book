@@ -72,8 +72,7 @@
     //     }) 
     //   })
     // },
-    created () {
-      debugger
+    created () { 
       this.id = this.$route.params.id.split("-")[1]
       this.getBookDetail(this.$route.params.id)
     },

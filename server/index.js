@@ -11,10 +11,13 @@ router.get('/test', function (req, res) {
 })
 
 router.get('/index', function (req, res) {
-  get_novel_data('http://m.qingdiba.com/', function (err, result) {
-    if (err) return res.json({err:err});
-    else return res.json(result)
-  })
+  var json = {"host_novels":[{"url":"info-4","image":"http://www.qingdi.org/files/article/image/0/4/4s.jpg","title":"纨绔邪皇","author":"作者：开荒","review":"简介：天圣二十七年九月十七，当安国公世子嬴冲在咸阳城勾栏巷被天外陨星砸晕的时候，大秦国师守正道人手持玄宙天珠坐化于城外白云观内。     ——..."},{"url":"info-1357","image":"http://www.qingdi.org/files/article/image/1/1357/1357s.jpg","title":"史上最强师兄","author":"作者：八月飞鹰","review":"简介：燕赵歌第一次穿越，穿到了武道文明繁盛至极的异世界，一头撞进包罗万象，遍收天下经典的神宫藏书楼里，但随后便是一场天地大劫，连神宫也破灭了。..."},{"url":"info-8780","image":"http://www.qingdi.org/files/article/image/8/8780/8780s.jpg","title":"偷香","author":"作者：墨武","review":"简介：　穿越到三国附身到曹府家奴身上的单飞，一心只想做个成功人士。     不想白富美和巅峰人生难以兼得，高富帅阻挡他融资的前行。 \r\n   ..."}],"fantasy_novels":[{"url":"http://m.qingdiba.com/info-4315/","title":"大主宰黑岩","sort":"[玄幻魔法]"},{"url":"http://m.qingdiba.com/info-885/","title":"吞噬星空","sort":"[玄幻魔法]"},{"url":"http://m.qingdiba.com/info-124/","title":"武炼巅峰","sort":"[玄幻魔法]"},{"url":"http://m.qingdiba.com/info-455/","title":"极品修真邪少","sort":"[玄幻魔法]"},{"url":"http://m.qingdiba.com/info-1271/","title":"九天剑魔","sort":"[玄幻魔法]"},{"url":"http://m.qingdiba.com/info-535/","title":"绝品邪少","sort":"[玄幻魔法]"}],"swordsman_novels":[{"url":"http://m.qingdiba.com/info-446/","title":"灵鼎","sort":"[武侠修真]"},{"url":"http://m.qingdiba.com/info-1318/","title":"天元神诀","sort":"[武侠修真]"},{"url":"http://m.qingdiba.com/info-355/","title":"神道","sort":"[武侠修真]"},{"url":"http://m.qingdiba.com/info-1421/","title":"霸仙绝杀","sort":"[武侠修真]"},{"url":"http://m.qingdiba.com/info-8769/","title":"铁掌无敌王小军","sort":"[武侠修真]"},{"url":"http://m.qingdiba.com/info-294/","title":"莽荒纪","sort":"[武侠修真]"}],"romantic_novels":[{"url":"http://m.qingdiba.com/info-617/","title":"绝品透视","sort":"[都市言情]"},{"url":"http://m.qingdiba.com/info-1077/","title":"山村风流","sort":"[都市言情]"},{"url":"http://m.qingdiba.com/info-1357/","title":"史上最强师兄","sort":"[都市言情]"},{"url":"http://m.qingdiba.com/info-1390/","title":"极品神医","sort":"[都市言情]"},{"url":"http://m.qingdiba.com/info-209/","title":"都市至尊神医","sort":"[都市言情]"},{"url":"http://m.qingdiba.com/info-802/","title":"官道红颜","sort":"[都市言情]"}],"history_novels":[{"url":"http://m.qingdiba.com/info-2880/","title":"重生之官场鬼才","sort":"[历史军事]"},{"url":"http://m.qingdiba.com/info-202/","title":"盛唐夜唱","sort":"[历史军事]"},{"url":"http://m.qingdiba.com/info-76/","title":"公子风流","sort":"[历史军事]"},{"url":"http://m.qingdiba.com/info-3/","title":"国色生枭","sort":"[历史军事]"},{"url":"http://m.qingdiba.com/info-103/","title":"北宋小厨师","sort":"[历史军事]"},{"url":"http://m.qingdiba.com/info-926/","title":"重生之红星传奇","sort":"[历史军事]"}]};
+  res.json(result)
+  /*调用网站太卡了 模拟一个json*/
+  // get_novel_data('http://m.qingdiba.com/', function (err, result) {
+  //   if (err) return res.json({err:err});
+  //   else return res.json(result)
+  // })
 })
 router.get('/book', function (req, res) {
   get_novels_info(req.query.id, function (err, result) {

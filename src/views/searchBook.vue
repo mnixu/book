@@ -27,11 +27,9 @@
       this.getBookDetail(this.title)
     },
     methods: {
-      getBookDetail (title) {   
-        this.$store.commit('START_LOADING') 
+      getBookDetail (title) {    
         this.$http.get(`/api/search?title=${title}`).then(response =>{  
-          this.books = response.body;   
-          this.$store.commit('FINISH_LOADING')  
+          this.books = response.body;    
         })
       }
     },

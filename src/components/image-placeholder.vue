@@ -1,6 +1,6 @@
 <template>
   <div class="img-responsive" v-bind:style="{'background-image':'url('+placeholder+')'}" style="background-size:100%;width: 100%;height:100%">
-    <img :src="src" v-on:load="loaded" style="width: 100%;height:100% transition: all 1.2s ease;"
+    <img :src="src" v-on:load="loaded" style="width: 100%;height:100%"
          v-bind:style="{'opacity':finish?1:0}">
   </div>
 </template>

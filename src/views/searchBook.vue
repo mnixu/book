@@ -37,7 +37,8 @@
       // 切换页面
       '$route' (to, from) {  
         if(to.params && to.query.title){
-          this.getBookDetail (to.query.title)
+          this.title = this.$route.query.title;
+          this.getBookDetail (to.query.title) 
         } 
           // 如果是当前页面切换分类的情况 
       }

@@ -6,7 +6,7 @@
     </div>
     <div class="book_list">
       <div class="book_list_detail" v-for="bookList in bookList">
-        <router-link :to='"/detail/"+bookList.url.split("/")[3]'> 
+        <router-link :to='"/detail/"+bookList.url'> 
             <div class="photo">
               <image-placeholder :src="bookList.image"
                             placeholder="http://static.m.maizuo.com/v4/static/app/asset/3d2cdb3bd9a23609aa2d84e7c2bfd035.png"></image-placeholder>
@@ -22,8 +22,7 @@
                   <!--<li>分类：玄幻/东方玄幻</li>-->
 
                 </ul>
-                <div class="about">
-                {{bookList.review}}
+                <div class="about" v-html="bookList.review"> 
                 </div> 
               </div>
             </div> 
@@ -83,6 +82,7 @@ export default {
       padding: 1px;
       img {
         border: 0;
+        max-height: 100px;
       }
     }
     .desec {

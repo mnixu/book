@@ -1,5 +1,5 @@
 <template>
-  <div class="book_detail"> 
+  <div class="book_detail" v-if="books"> 
 
     <detail-header :title="books.title"></detail-header>
 

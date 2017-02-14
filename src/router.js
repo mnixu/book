@@ -32,12 +32,13 @@ export default [
     component: (resolve) => {
       require(['./views/bookContent'], resolve)
     } 
-  },  
+  }, 
   {
-    path: '*',
+    path: '/search', 
+    name: 'search',
     component: (resolve) => {
-      require(['./views/index'], resolve)
+      require(['./views/searchBook'], resolve)
     } 
-  }
+  } 
 ]
 

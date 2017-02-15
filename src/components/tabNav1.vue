@@ -69,7 +69,7 @@ export default {
 
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   @prefixClass: tab;
   @easing-in-out: cubic-bezier(0.35, 0, 0.25, 1);
   @effect-duration: .3s;

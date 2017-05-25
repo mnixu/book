@@ -27,8 +27,7 @@
     },  
     mounted() {  
       let bookContent = window.sessionStorage.bookContent
-      if (bookContent && JSON.parse(bookContent).id == this.$route.params.id){
-        this.books = JSON.parse(bookContent).books 
+      if (bookContent && JSON.parse(bookContent).id == this.$route.params.id){ 
 
         setTimeout(() =>{
           document.body.scrollTop = (JSON.parse(bookContent).scroll)
@@ -54,8 +53,7 @@
           // 当前页面主题数据 
         let scroll = common.getScrollTop();
         window.sessionStorage.bookContent = JSON.stringify({
-          id: from.params.id,
-          books: this.books,
+          id: from.params.id, 
           scroll: scroll
         }); 
           

@@ -61,17 +61,7 @@
         books: {},
         id: null
       }     
-    },  
-    // beforeRouteEnter(to, from, next){   
-    //   next(vm => { 
-    //     vm.id = vm.$route.params.id.split("-")[1];
-    //     vm.$store.commit('START_LOADING')
-    //     vm.$http.get(`/api/book?id=${vm.$route.params.id}`).then(response =>{  
-    //       vm.books = response.body;  
-    //       vm.$store.commit('FINISH_LOADING') 
-    //     }) 
-    //   })
-    // },
+    },   
     created () { 
       this.id = this.$route.params.id.split("-")[1]
       this.getBookDetail(this.$route.params.id)

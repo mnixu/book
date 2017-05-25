@@ -296,7 +296,7 @@ function get_catalog(id, callback) {
 function get_content(suffix_url, callback) {
   var prefix_url = `http://m.qingdi.org`;
   var url = `${prefix_url}/${suffix_url}/`;
-  var books = { title: null, content: null, nextBook: null, lastBook: null, allBooks: null };
+  var books = { title: null, content: null, nextBook: null, nowBook: suffix_url, lastBook: null, allBooks: null };
   var task = [];
   task.push(function (callback) {
 

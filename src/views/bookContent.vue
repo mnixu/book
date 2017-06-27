@@ -1,10 +1,15 @@
 <template>
   <div class="container" v-if="books">
     <div class="content">
-      <div v-for="book in books" :data-id="book.nowBook" class="reader">
-        <h3>{{book.title}}</h3>
-        <div v-html="book.content"></div>
+      <div class="page-read-top">
+        <h4>{{nowBook?nowBook.title:books[0].title }}</h4>
       </div>
+      <article class="read-article">
+        <div v-for="book in books" :data-id="book.nowBook" class="reader">
+          <h2>{{book.title}}</h2>
+          <div v-html="book.content"></div>
+        </div>
+      </article>
       <div class="book-switch" style="">
         <ul class="clearfix">
           <!--<li><router-link :to='books.lastBook?"/detailMore/book/"+books.lastBook:"/detailMore/"+books.allBooks'>上一章</router-link></li> 
@@ -71,7 +76,7 @@
   export default {
     data() {
       return {
-        bookId: null,
+        nowBook: null,
         books: [],
         nextbook: {},
         offsetTopArr: [],
@@ -93,7 +98,10 @@
           this.nextbook = response.body;
           this.books.push(response.body);
           this.scroll = true;
-          setTimeout(() => this.getOffsetTopArr(), 10)
+          // dom更新完毕之后获取所有章节所对应的高度
+          this.$nextTick(function() {
+            this.getOffsetTopArr()
+          }) 
         }).catch(function (e) {
           console.log(e);
           this.scroll = true;
@@ -107,7 +115,7 @@
           if (index == arr.length - 1 && scroll > value) return true;
           return  scroll > value && scroll < this.offsetTopArr[index + 1];  
         })  
-        if (index > -1) this.bookId = this.books[index].nowBook;
+        if (index > -1) this.nowBook = this.books[index];
 
         if (this.scroll && (Util.getScrollTop() + Util.getWindowHeight() > Util.getScrollHeight() - 10)) {
           this.getBookDetail(this.nextbook.nextBook)
@@ -135,7 +143,7 @@
       },
       // 监听当前的bookId， 改变的话则改变地址栏。
       bookId (to, from){ 
-        history.pushState(null, null, to)
+        history.pushState(null, null, to.nowBook)
       }
     }
   }
@@ -147,6 +155,7 @@
     width: 100%;
     height: 100%;
     font-size: 14px;
+    background: #fff;
   }
 
 
@@ -297,12 +306,30 @@
 
 
 
-  .content {
-    padding: 0 10px 10px 10px;
+  .content { 
     word-break: break-all;
-    h3 {
-      text-align: center;
-      padding: 30px 5px 10px 5px;
+    h2 {
+      font-size: 1.5em;
+      font-weight: 400;
+      line-height: 1.2;
+      margin: 1em 0;
+    }
+    .page-read-top {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 44px;
+      h4 {
+        font-size: .75rem;
+        font-weight: 400;
+        position: absolute;
+        top: 15px;
+        left: 1rem; 
+      }
+    }
+    .read-article {
+      padding: 45px 16px 16px 16px;
     }
   }
 

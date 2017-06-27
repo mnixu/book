@@ -90,8 +90,8 @@
     methods: {
       //history.pushState(null, null, "123");
       getBookDetail(id) {
-        if(!this.scroll) return
-        if (!id) return;
+        if (!this.scroll) return
+        if (!id) return this.router.push("/detailMore/"+this.books.allBooks); 
         this.scroll = false;
         this.$http.get(`/api/content?id=${id}`).then(response => {
           if (!response.body) return Promise.reject("获取数据失败");
@@ -141,8 +141,8 @@
         }
         // 如果是当前页面切换分类的情况 
       },
-      // 监听当前的bookId， 改变的话则改变地址栏。
-      bookId (to, from){ 
+      // 监听当前的nowBook， 改变的话则改变地址栏。
+      nowBook (to, from){  
         history.pushState(null, null, to.nowBook)
       }
     }
@@ -320,6 +320,7 @@
       right: 0;
       left: 0;
       height: 44px;
+      background: #fff;
       h4 {
         font-size: .75rem;
         font-weight: 400;
